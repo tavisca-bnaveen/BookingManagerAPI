@@ -10,5 +10,6 @@ namespace BookingManager.Services.Interfaces
 	{
 		bool GetAuthentiction(Login login);
 		string Signup(Login login);
+		List<Login> GetUsers();
 	}
 }

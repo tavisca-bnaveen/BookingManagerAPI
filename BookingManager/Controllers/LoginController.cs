@@ -37,6 +37,12 @@ namespace BookingManager.Controllers
 
 			return Ok(service.Signup(login));
 		}
+		[HttpGet("AllUsers")]
+		public ActionResult<IEnumerable<List<Login>>> AllUsers()
+		{
+			ILoginService service = new LoginService();
+			return Ok(service.GetUsers());
+		}
 
 	}
 }

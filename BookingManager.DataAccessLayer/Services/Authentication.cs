@@ -89,5 +89,38 @@ namespace BookingManager.DataAccessLayer.Services
 				
 			}
 		}
+
+		public List<Login> GetAllUsers()
+		{
+			var users = new List<Login>();
+			try
+			{
+				_SqlConnection.Open();
+				
+				using (_SqlCommand = new SqlCommand("select * from Auth", _SqlConnection))
+				{
+					var reader = _SqlCommand.ExecuteReader();
+					if (reader.HasRows)
+					{
+						while (reader.Read())
+						{
+
+							var _login = new Login()
+							{
+								Email = reader[0].ToString(),
+								Password = reader[1].ToString()
+
+							};
+							users.Add(_login);
+						}
+					}
+				}
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+			return users;
+		}
 	}
 }

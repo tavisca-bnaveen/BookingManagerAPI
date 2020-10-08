@@ -10,5 +10,7 @@ namespace BookingManager.DataAccessLayer.Interfaces
 	{
 		bool GetAuthencation(Login login);
 		string SignUP(Login login);
+
+		List<Login> GetAllUsers();
 	}
 }

@@ -16,10 +16,17 @@ namespace BookingManager.Services.Services
 			return _DbAuth.GetAuthencation(login);
 		}
 
+		public List<Login> GetUsers()
+		{
+			IAuthencation _DbAuth = new Authentication();
+			return _DbAuth.GetAllUsers();
+		}
+
 		public string Signup(Login login)
 		{
 			IAuthencation _DbAuth = new Authentication();
 			return _DbAuth.SignUP(login);
 		}
+
 	}
 }
