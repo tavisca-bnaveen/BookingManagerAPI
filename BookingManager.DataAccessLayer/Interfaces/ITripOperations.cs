@@ -12,7 +12,10 @@ namespace BookingManager.DataAccessLayer.Interfaces
 
 		Hotel GetHotel(string _HotelId);
 
-		Car GetCar(string _CarId); 
+		Car GetCar(string _CarId);
 
+		bool CancelFlight(string TripId, string PNR);
+		bool CancelCar(string TripId, string Id);
+		bool CancelHotel(string TripId, string Id);
 	}
 }

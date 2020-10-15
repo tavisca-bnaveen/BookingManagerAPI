@@ -15,6 +15,7 @@ namespace BookingManager.DataAccessLayer.Services
 			_TripOperations = new TripOperations();
 			_Parser = new Parser();
 		}
+
 		public List<Trip> GetAllTrips()
 		{
 			var dbtrips = _TripOperations.GetAllTrips();
@@ -41,11 +42,25 @@ namespace BookingManager.DataAccessLayer.Services
 				}
 				_Trip.Car = _cars;
 				_Trips.Add(_Trip);
-				//_Trip.TotalCost = CalculateAmount(_Trip.Flight, _Trip.Car, _Trip.Hotel);
-				//_Trip.Status = CalculateStatus(_Trip.Flight, _Trip.Car, _Trip.Hotel);
+				
 			}
 			return _Trips;
 		}
-		
+		public bool CancelFlight(string TripId, string PNR)
+		{
+			
+			return _TripOperations.CancelFlight(TripId, PNR);
+		}
+		public bool CancelHotel(string TripId, string Id)
+		{
+
+			return _TripOperations.CancelHotel(TripId, Id);
+		}
+		public bool CancelCar(string TripId, string Id)
+		{
+
+			return _TripOperations.CancelCar(TripId, Id);
+		}
+
 	}
 }

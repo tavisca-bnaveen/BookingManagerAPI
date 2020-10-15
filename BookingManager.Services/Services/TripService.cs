@@ -9,11 +9,31 @@ namespace BookingManager.Services.Services
 {
 	public class TripService : ITripService
 	{
+		PostOperations _PostOperations;
+		public TripService()
+		{
+			_PostOperations = new PostOperations();
+		}
+		public bool CancelFlight(string tripId, string PNR)
+		{
+			return _PostOperations.CancelFlight(tripId, PNR);
+		}
+
+		public bool CancelHotel(string tripId, string Id)
+		{
+			return _PostOperations.CancelHotel(tripId, Id);
+		}
+
+		public bool CancelCar(string tripId, string Id)
+		{
+			return _PostOperations.CancelCar(tripId, Id);
+		}
+
 		public List<Trip> GetTrips()
 		{
-			PostOperations postOperations = new PostOperations();
+			
 			var trips = new List<Trip>();
-			foreach(var trip in postOperations.GetAllTrips())
+			foreach(var trip in _PostOperations.GetAllTrips())
 			{
 				trip.TotalCost = CalculateAmount(trip.Flight, trip.Car, trip.Hotel);
 				trip.Status = CalculateStatus(trip.Flight, trip.Car, trip.Hotel);

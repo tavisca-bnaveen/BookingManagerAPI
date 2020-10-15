@@ -19,6 +19,72 @@ namespace BookingManager.DataAccessLayer.Services
 			_ConnectionString = dBConnection.GetConnectionString();
 			_SqlConnection = new SqlConnection(_ConnectionString);
 		}
+
+		public bool CancelFlight(string TripId, string PNR)
+		{
+			try
+			{
+				_SqlConnection.Open();
+				using (_SqlCommand = new SqlCommand("update Flight set Flight.Status='Cancel' where Flight.PNR='" + PNR + "'", _SqlConnection))
+				{
+					int rowsAffected = _SqlCommand.ExecuteNonQuery();
+					if (rowsAffected > 0)
+					{
+						return true;
+					}
+					
+				}
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+			return false;
+		}
+		public bool CancelHotel(string TripId, string Id)
+		{
+			try
+			{
+				_SqlConnection.Open();
+				using (_SqlCommand = new SqlCommand("update Hotel set Hotel.status='Cancel' where Hotel.Id='" + Id + "'", _SqlConnection))
+				{
+					int rowsAffected = _SqlCommand.ExecuteNonQuery();
+					if (rowsAffected > 0)
+					{
+						return true;
+					}
+
+				}
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+			return false;
+		}
+
+		public bool CancelCar(string TripId, string Id)
+		{
+			try
+			{
+				_SqlConnection.Open();
+				using (_SqlCommand = new SqlCommand("update Car set Car.status='Cancel' where Car.Id='" + Id + "'", _SqlConnection))
+				{
+					int rowsAffected = _SqlCommand.ExecuteNonQuery();
+					if (rowsAffected > 0)
+					{
+						return true;
+					}
+
+				}
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+			return false;
+		}
+
 		public List<DBTrip> GetAllTrips()
 		{
 			var _Trips= new List<DBTrip>();

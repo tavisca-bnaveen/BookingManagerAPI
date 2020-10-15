@@ -21,5 +21,49 @@ namespace BookingManager.Controllers
 			ITripService tripService = new TripService();
 			return Ok(tripService.GetTrips());
 		}
+		[HttpDelete("CancelFlight")]
+		public ActionResult<bool> CancelFlight([FromQuery] string TripId, [FromQuery] string PNR)
+		{
+			ITripService tripService = new TripService();
+			var output = tripService.CancelFlight(TripId, PNR);
+			if (output)
+			{
+				return Ok(output);
+			}
+			else
+			{
+				return BadRequest(output);
+			}
+		}
+
+		[HttpDelete("CancelHotel")]
+		public ActionResult<bool> CancelHotel([FromQuery] string TripId, [FromQuery] string Id)
+		{
+			ITripService tripService = new TripService();
+			var output = tripService.CancelHotel(TripId, Id);
+			if (output)
+			{
+				return Ok(output);
+			}
+			else
+			{
+				return BadRequest(output);
+			}
+		}
+
+		[HttpDelete("CancelCar")]
+		public ActionResult<bool> CancelCar([FromQuery] string TripId, [FromQuery] string Id)
+		{
+			ITripService tripService = new TripService();
+			var output = tripService.CancelCar(TripId, Id);
+			if (output)
+			{
+				return Ok(output);
+			}
+			else
+			{
+				return BadRequest(output);
+			}
+		}
 	}
 }
