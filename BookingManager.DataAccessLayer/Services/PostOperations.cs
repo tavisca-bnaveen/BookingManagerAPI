@@ -61,6 +61,17 @@ namespace BookingManager.DataAccessLayer.Services
 
 			return _TripOperations.CancelCar(TripId, Id);
 		}
-
+		public string GetFlightStatus(string TripId, string PNR)
+		{
+			return _TripOperations.GetFlightStatus(TripId, PNR);
+		}
+		public string GetHotelStatus(string TripId, string Id)
+		{
+			return _TripOperations.GetHotelStatus(TripId, Id);
+		}
+		public string GetCarStatus(string TripId, string Id)
+		{
+			return _TripOperations.GetCarStatus(TripId, Id);
+		}
 	}
 }

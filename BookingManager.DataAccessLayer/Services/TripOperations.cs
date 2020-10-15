@@ -19,7 +19,84 @@ namespace BookingManager.DataAccessLayer.Services
 			_ConnectionString = dBConnection.GetConnectionString();
 			_SqlConnection = new SqlConnection(_ConnectionString);
 		}
+		public string GetFlightStatus(string TripId, string PNR)
+		{
+			try
+			{
+				_SqlConnection.Open();
+				using (_SqlCommand = new SqlCommand("select top 1 Flight.Status from  Flight where Flight.PNR='"+PNR+"'", _SqlConnection))
+				{
+					var reader = _SqlCommand.ExecuteReader();
+					if (reader.HasRows)
+					{
+						while (reader.Read())
+						{
+							return reader[0].ToString();
+						}
 
+					}
+				}
+
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+
+			return null;
+		}
+		public string GetHotelStatus(string TripId, string Id)
+		{
+			try
+			{
+				_SqlConnection.Open();
+				using (_SqlCommand = new SqlCommand("select top 1 Hotel.status from  Hotel where Hotel.Id='" + Id + "'", _SqlConnection))
+				{
+					var reader = _SqlCommand.ExecuteReader();
+					if (reader.HasRows)
+					{
+						while (reader.Read())
+						{
+							return reader[0].ToString();
+						}
+
+					}
+				}
+
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+
+			return null;
+		}
+		public string GetCarStatus(string TripId, string Id)
+		{
+			try
+			{
+				_SqlConnection.Open();
+				using (_SqlCommand = new SqlCommand("select top 1 Car.status from  Car where Car.Id='" + Id + "'", _SqlConnection))
+				{
+					var reader = _SqlCommand.ExecuteReader();
+					if (reader.HasRows)
+					{
+						while (reader.Read())
+						{
+							return reader[0].ToString();
+						}
+
+					}
+				}
+
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+
+			return null;
+		}
 		public bool CancelFlight(string TripId, string PNR)
 		{
 			try

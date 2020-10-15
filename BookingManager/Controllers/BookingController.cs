@@ -15,17 +15,23 @@ namespace BookingManager.Controllers
 	[ApiController]
 	public class BookingController : Controller
     {
+		ITripService _tripService;
+		public BookingController()
+		{
+			_tripService = new TripService();
+		}
+
 		[HttpGet("GetAllTrips")]
 		public ActionResult<List<Trip>> GetAllTrips()
 		{
-			ITripService tripService = new TripService();
-			return Ok(tripService.GetTrips());
+			
+			return Ok(_tripService.GetTrips());
 		}
 		[HttpDelete("CancelFlight")]
 		public ActionResult<bool> CancelFlight([FromQuery] string TripId, [FromQuery] string PNR)
 		{
-			ITripService tripService = new TripService();
-			var output = tripService.CancelFlight(TripId, PNR);
+			
+			var output = _tripService.CancelFlight(TripId, PNR);
 			if (output)
 			{
 				return Ok(output);
@@ -39,8 +45,8 @@ namespace BookingManager.Controllers
 		[HttpDelete("CancelHotel")]
 		public ActionResult<bool> CancelHotel([FromQuery] string TripId, [FromQuery] string Id)
 		{
-			ITripService tripService = new TripService();
-			var output = tripService.CancelHotel(TripId, Id);
+			
+			var output = _tripService.CancelHotel(TripId, Id);
 			if (output)
 			{
 				return Ok(output);
@@ -54,8 +60,8 @@ namespace BookingManager.Controllers
 		[HttpDelete("CancelCar")]
 		public ActionResult<bool> CancelCar([FromQuery] string TripId, [FromQuery] string Id)
 		{
-			ITripService tripService = new TripService();
-			var output = tripService.CancelCar(TripId, Id);
+			
+			var output = _tripService.CancelCar(TripId, Id);
 			if (output)
 			{
 				return Ok(output);
@@ -64,6 +70,21 @@ namespace BookingManager.Controllers
 			{
 				return BadRequest(output);
 			}
+		}
+		[HttpGet("GetFlightStatus")]
+		public ActionResult<string> GetFlightStatus([FromQuery] string TripId, [FromQuery] string PNR)
+		{
+			return Ok(_tripService.GetFlightStatus(TripId, PNR));
+		}
+		[HttpGet("GetHotelStatus")]
+		public ActionResult<string> GetHotelStatus([FromQuery] string TripId, [FromQuery] string Id)
+		{
+			return Ok(_tripService.GetHotelStatus(TripId, Id));
+		}
+		[HttpGet("GetCarStatus")]
+		public ActionResult<string> GetCarStatus([FromQuery] string TripId, [FromQuery] string Id)
+		{
+			return Ok(_tripService.GetCarStatus(TripId, Id));
 		}
 	}
 }

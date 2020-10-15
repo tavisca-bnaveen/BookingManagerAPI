@@ -41,6 +41,18 @@ namespace BookingManager.Services.Services
 			}
 			return trips;
 		}
+		public string GetFlightStatus(string TripId, string PNR)
+		{
+			return _PostOperations.GetFlightStatus(TripId, PNR);
+		}
+		public string GetHotelStatus(string TripId, string Id)
+		{
+			return _PostOperations.GetHotelStatus(TripId, Id);
+		}
+		public string GetCarStatus(string TripId, string Id)
+		{
+			return _PostOperations.GetCarStatus(TripId, Id);
+		}
 		private string CalculateAmount(Flight flight, List<Car> cars, List<Hotel> hotels)
 		{
 			double amount = 0;
