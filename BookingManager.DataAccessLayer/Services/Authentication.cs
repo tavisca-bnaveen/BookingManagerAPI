@@ -108,7 +108,7 @@ namespace BookingManager.DataAccessLayer.Services
 							var _login = new Login()
 							{
 								Email = reader[0].ToString(),
-								Password = reader[1].ToString()
+								Password = " "
 
 							};
 							users.Add(_login);
