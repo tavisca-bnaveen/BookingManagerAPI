@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookingManager.Models;
 using BookingManager.Services.Interfaces;
 
 using BookingManager.Services.Services;
@@ -42,6 +43,12 @@ namespace BookingManager.Controllers
 		{
 			ILoginService service = new LoginService();
 			return Ok(service.GetUsers());
+		}
+		[HttpPut("ChangePassword")]
+		public ActionResult<IEnumerable<string>> ChangePassword([FromBody]IntermediateLogin intermediateLogin)
+		{
+			ILoginService service = new LoginService();
+			return Ok(service.ChangePassword(intermediateLogin.Login,intermediateLogin.NewPassword));
 		}
 
 	}

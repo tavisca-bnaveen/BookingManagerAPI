@@ -122,5 +122,36 @@ namespace BookingManager.DataAccessLayer.Services
 			}
 			return users;
 		}
+
+		public string ChangePassword(Login login, string newPassword)
+		{
+			try
+			{
+				if (this.ISValidUser(login.Email))
+				{
+					_SqlConnection.Open();
+					using (_SqlCommand = new SqlCommand("update Auth set Auth.Password='" + newPassword + "' where Auth.Email='" + login.Email + "' and Auth.PassWord='"+login.Password +"'", _SqlConnection))
+					{
+						if (_SqlCommand.ExecuteNonQuery() > 0)
+						{
+							return "Password Updated Successfully";
+						}
+						else
+						{
+							return "Invalid Current password";
+						}
+					}
+				}
+				else
+				{
+					return "Email doesn't exist";
+				}
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+			
+		}
 	}
 }

@@ -32,13 +32,17 @@ namespace BookingManager.DataAccessLayer.Services
 				var hotelIds = trip.Hotel.Split(',');
 				foreach(var  Id in hotelIds)
 				{
-					_hotels.Add(_TripOperations.GetHotel(Id));
+					var hotel = _TripOperations.GetHotel(Id);
+					if(hotel.Id!=null)
+						_hotels.Add(hotel);
 				}
 				_Trip.Hotel = _hotels;
 				var CarIds = trip.Car.Split(',');
 				foreach (var Id in CarIds)
 				{
-					_cars.Add(_TripOperations.GetCar(Id));
+					var car = _TripOperations.GetCar(Id);
+					if(car.Id!=null)
+						_cars.Add(car);
 				}
 				_Trip.Car = _cars;
 				_Trips.Add(_Trip);
