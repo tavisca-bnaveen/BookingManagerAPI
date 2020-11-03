@@ -10,5 +10,7 @@ namespace BookingManager.DataAccessLayer.Interfaces
 		Profile GetProfileById(string Id);
 
 		bool UpdateProfileById(Profile profile);
+
+		bool CreateProfile(Profile profile);
 	}
 }

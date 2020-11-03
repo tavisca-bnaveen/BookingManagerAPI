@@ -20,13 +20,27 @@ namespace BookingManager.Controllers
 		public ActionResult<IEnumerable<Profile>> GetProfile([FromQuery] string Id)
 		{
 			IProfileService profileService = new ProfileService();
-			return Ok(profileService.GetProfileById(Id));
+			var profile = profileService.GetProfileById(Id);
+			if (profile != null)
+			{
+				return Ok(profile);
+			}	
+			else
+			{
+				return BadRequest(profile);
+			}
 		}
 		[HttpPost("UpdateProfile")]
-		public ActionResult<IEnumerable<Profile>> UpdateProfile([FromBody] Profile profile)
+		public ActionResult<IEnumerable<bool>> UpdateProfile([FromBody] Profile profile)
 		{
 			IProfileService profileService = new ProfileService();
 			return Ok(profileService.UpdateProfileById(profile));
+		}
+		[HttpPost("CreateProfile")]
+		public ActionResult<IEnumerable<bool>> CreateProfile([FromBody] Profile profile)
+		{
+			IProfileService profileService = new ProfileService();
+			return Ok(profileService.CreateProfile(profile));
 		}
 
 	}

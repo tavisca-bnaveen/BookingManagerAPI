@@ -15,6 +15,12 @@ namespace BookingManager.Services.Services
 		{
 			dbProfileService = new DbProfileService();
 		}
+
+		public bool CreateProfile(Profile profile)
+		{
+			return dbProfileService.CreateProfile(profile);
+		}
+
 		public Profile GetProfileById(string Id)
 		{
 			return dbProfileService.GetProfileById(Id);

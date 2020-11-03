@@ -22,6 +22,38 @@ namespace BookingManager.DataAccessLayer.Services
 			_SqlConnection = new SqlConnection(_ConnectionString);
 
 		}
+
+		public bool CreateProfile(Profile profile)
+		{
+			try
+			{
+				_SqlConnection.Open();
+
+				using (var sqlCommand = new SqlCommand("insert into Profile values('"+profile.Email+"', '"+profile.Name+"', '"+profile.Age+"', '"+profile.Hobbies+"', '"+profile.Gender+"', '"+profile.Joined+"')", _SqlConnection))
+				{
+					var reader = sqlCommand.ExecuteNonQuery();
+					if (reader > 0)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+
+				}
+			}
+			catch(Exception ex)
+			{
+				return false;
+			}
+			finally
+			{
+				_SqlConnection.Close();
+			}
+
+		}
+
 		public Profile GetProfileById(string Id)
 		{
 			Profile profile=null;
